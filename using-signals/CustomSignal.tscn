@@ -18,3 +18,5 @@ max_value = 10.0
 value = 10.0
 texture_over = null
 texture_progress = ExtResource( 4 )
+
+[connection signal="health_changed" from="Player" to="LifeBar" method="_on_Player_health_changed"]

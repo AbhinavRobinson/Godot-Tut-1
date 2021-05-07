@@ -3,9 +3,11 @@ extends Area2D
 # speed of player
 export var speed = 400.0
 
+#screen size of window
 var screen_size = Vector2.ZERO
 
 func _ready():
+	# get screen size
 	screen_size = get_viewport_rect().size
 
 func _process(delta):
@@ -23,9 +25,13 @@ func _process(delta):
 	if Input.is_action_pressed("move_up"):
 		direction.y -= 1
 	
+	# if more than one key is pressed, this will normalize it to magnitude 1.0
 	if direction.length() > 1:
 		direction = direction.normalized()
 	
+	# move player
 	position += direction * speed * delta
+	
+	# limit player to screen
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0 ,screen_size.y)

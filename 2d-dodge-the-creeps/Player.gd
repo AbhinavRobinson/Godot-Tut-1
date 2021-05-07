@@ -12,6 +12,7 @@ var screen_size = Vector2.ZERO
 func _ready():
 	# get screen size
 	screen_size = get_viewport_rect().size
+	hide()
 
 func _process(delta):
 	# default to no motion

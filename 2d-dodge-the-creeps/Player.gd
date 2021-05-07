@@ -1,5 +1,6 @@
 extends Area2D
 
+# player is hit
 signal hit
 
 # speed of player
@@ -42,6 +43,7 @@ func _process(delta):
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0 ,screen_size.y)
 
+	# give animation direction (left/right/up/down)
 	if direction.x != 0:
 		$AnimatedSprite.animation = "right"
 		$AnimatedSprite.flip_v = false
@@ -51,11 +53,13 @@ func _process(delta):
 		$AnimatedSprite.flip_v = direction.y > 0
 
 func start(new_position):
+	# init player
 	position = new_position
 	show()
 	$CollisionShape2D.disabled = false
 	
 func _on_Player_body_entered(body):
+	# if player hit, fail state
 	hide()
 	$CollisionShape2D.set_deferred("disabled", true)
 	emit_signal("hit")

@@ -6,8 +6,8 @@ var health = 10
 
 func take_damage(amount):
 	health -= amount
-	if health < 0:
-		health = 0
+	if health <= 0:
+		health = 10
 	get_node("AnimationPlayer").play("take_damage")
 	emit_signal("health_changed", health)
 

@@ -2,6 +2,7 @@ extends Node
 
 # all mobs scene
 export (PackedScene) var mob_scene
+var score = 0
 
 func _ready():
 	# randomize on start

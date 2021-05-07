@@ -26,8 +26,12 @@ func _process(delta):
 		direction.y -= 1
 	
 	# if more than one key is pressed, this will normalize it to magnitude 1.0
-	if direction.length() > 1:
+	if direction.length() > 0:
 		direction = direction.normalized()
+		# animate player
+		$AnimatedSprite.play()
+	else:
+		$AnimatedSprite.stop()
 	
 	# move player
 	position += direction * speed * delta
@@ -35,3 +39,11 @@ func _process(delta):
 	# limit player to screen
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0 ,screen_size.y)
+
+	if direction.x != 0:
+		$AnimatedSprite.animation = "right"
+		$AnimatedSprite.flip_v = false
+		$AnimatedSprite.flip_h = direction.x < 0
+	elif direction.y != 0:
+		$AnimatedSprite.animation = "up"
+		$AnimatedSprite.flip_v = direction.y > 0

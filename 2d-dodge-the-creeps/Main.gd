@@ -16,17 +16,21 @@ func new_game():
 	$Player.start($StartPosition.position)
 	
 	$StartTimer.start()
+	$Music.play()
 	
 	$HUD.show_message("Get Ready ...")
 	
 	yield($StartTimer, "timeout")
 	$ScoreTimer.start()
 	$MobTimer.start()
+	
 
 func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$Music.stop()
+	$GameOverSound.play()
 
 func _on_MobTimer_timeout():
 	# get mob spawn location
